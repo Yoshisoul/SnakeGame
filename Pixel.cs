@@ -4,16 +4,12 @@ namespace SnakeGame
     public struct Pixel
     {
         private const char PIXEL_CHAR = '█';
-        private Func<int> next1;
-        private Func<int> next2;
-        private ConsoleColor red;
-
         public int X { get; }
         public int Y { get; }
         public ConsoleColor Color { get; }
         public int PixelSize { get; }
 
-        public Pixel(int x, int y, ConsoleColor color, int pixelSize = 3)
+        public Pixel(int x, int y, ConsoleColor color, int pixelSize)
         {
             X = x;
             Y = y;

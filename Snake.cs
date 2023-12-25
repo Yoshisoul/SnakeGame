@@ -19,6 +19,7 @@ namespace SnakeGame
         public ConsoleColor HeadColor { get; }
         public ConsoleColor BodyColor { get; }
         public ushort BodyLength { get; private set; }
+        public const ushort PIXEL_SIZE = Program.PIXEL_SIZE;
 
         public Snake
         (
@@ -36,11 +37,11 @@ namespace SnakeGame
             BodyLength = bodyLength;
             _body = new Queue<Pixel>();
 
-            Head = new Pixel(initialX, InitialY, HeadColor);
+            Head = new Pixel(initialX, InitialY, HeadColor, PIXEL_SIZE);
 
             for (int i = BodyLength; i > 0; i--)
             {
-                _body.Enqueue(new Pixel( Head.X - i, Head.Y, BodyColor));
+                _body.Enqueue(new Pixel( Head.X - i, Head.Y, BodyColor, PIXEL_SIZE));
             }
 
             Draw();
@@ -73,16 +74,16 @@ namespace SnakeGame
                 var tail = _body.Dequeue();
                 tail.Clear();
             }
-            
-            var prevHead = new Pixel(Head.X, Head.Y, BodyColor);
+
+            var prevHead = new Pixel(Head.X, Head.Y, BodyColor, PIXEL_SIZE);
             _body.Enqueue(prevHead);
 
             Head = direction switch
             {
-                Direction.Right => new Pixel(Head.X + 1, Head.Y, HeadColor),
-                Direction.Left => new Pixel(Head.X - 1, Head.Y, HeadColor),
-                Direction.Up => new Pixel(Head.X, Head.Y - 1, HeadColor),
-                Direction.Down => new Pixel(Head.X, Head.Y + 1, HeadColor),
+                Direction.Right => new Pixel(Head.X + 1, Head.Y, HeadColor, PIXEL_SIZE),
+                Direction.Left => new Pixel(Head.X - 1, Head.Y, HeadColor, PIXEL_SIZE),
+                Direction.Up => new Pixel(Head.X, Head.Y - 1, HeadColor, PIXEL_SIZE),
+                Direction.Down => new Pixel(Head.X, Head.Y + 1, HeadColor, PIXEL_SIZE),
                 _ => Head
             };
 

@@ -5,7 +5,7 @@ namespace SnakeGame
 {
     class Program
     {
-        private const ushort PIXEL_SIZE = 3;
+        public const ushort PIXEL_SIZE = 2;
         private const ushort MAP_WIDTH = 60;
         private const ushort MAP_HEIGHT = 20;
         private const ushort FRAME_MS = 150;
@@ -61,14 +61,14 @@ namespace SnakeGame
         {
             for (int i = 0; i < MAP_WIDTH; i++)
             {
-                new Pixel(i, 0, BORDER_COLOR).Draw();
-                new Pixel(i, MAP_HEIGHT - 1, BORDER_COLOR).Draw();
+                new Pixel(i, 0, BORDER_COLOR, PIXEL_SIZE).Draw();
+                new Pixel(i, MAP_HEIGHT - 1, BORDER_COLOR, PIXEL_SIZE).Draw();
             }
 
             for (int i = 0; i < MAP_HEIGHT - 1; i++)
             {
-                new Pixel(0, i, BORDER_COLOR).Draw();
-                new Pixel(MAP_WIDTH - 1, i, BORDER_COLOR).Draw();
+                new Pixel(0, i, BORDER_COLOR, PIXEL_SIZE).Draw();
+                new Pixel(MAP_WIDTH - 1, i, BORDER_COLOR, PIXEL_SIZE).Draw();
             }
         }
 
@@ -129,7 +129,7 @@ namespace SnakeGame
             Pixel food;
             do
             {
-                food = new Pixel(random.Next(1, MAP_WIDTH - 2), random.Next(1, MAP_HEIGHT - 2), FOOD_COLOR);
+                food = new Pixel(random.Next(1, MAP_WIDTH - 2), random.Next(1, MAP_HEIGHT - 2), FOOD_COLOR, PIXEL_SIZE);
             } while (snake.Head.X == food.X && snake.Head.Y == food.Y ||
                 snake.Body.Any(pixel => pixel.X == food.X && pixel.Y == food.Y));
 
